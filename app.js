@@ -7,10 +7,7 @@ var col = 'datosPrueba';
 //console.log(cpu);
 //console.log(sistema);
 // ssh -p2222 bitnami@localhost comand connect to bitnami
-
 // Mongose
-var mongoose = require('mongoose');
-mongoose.connect(mongoDB);
 
 var MongoClient = require('mongodb').MongoClient
   , assert = require('assert');
