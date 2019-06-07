@@ -1,8 +1,12 @@
 var express = require("express");
 var mongoose = require('mongoose');
+mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://lucas:1234@localhost:27017/empleados');
+
+
 var Schema = mongoose.Schema;
-var blogSchema = new Schema({
+
+var blogSchema = new mongoose.Schema({
     nombre:  String,
     tarea: String,
     estado: String
@@ -18,6 +22,7 @@ app.get("/",function(req,res){
  res.send("Hello world");
 });
 */
+/* GET ALL EMPLEADO */
 empleadoslist = function(req,res){
     //res.send("probandooo");
     Empleado.find(function(err, response){
@@ -25,8 +30,49 @@ empleadoslist = function(req,res){
         res.json(response);
      }); 
 };
+
+/* GET SINGLE EMPLEADO BY ID */
+empleadoId = function(req, res, next) {
+  Empleado.findById(req.params.id, function (err, post) {
+    if (err) throw err;
+    res.json(post);
+  });
+};
+
+/* SAVE EMPLEADO */
+saveEmpleado = function(req, res, next) {
+  Empleado.create(req.body, function (err, post) {
+    if (err) return next(err);
+    res.json(post);
+  });
+};
+
+/* DELETE PRODUCT */
+deleteId =  function(req, res, next) {
+  Empleado.findByIdAndRemove(req.params.id, req.body, function (err, post) {
+    if (err) return next(err);
+    res.json(post);
+  });
+};
+
+/* UPDATE PRODUCT */
+updateEmpl = function(req, res, next) {
+  Empleado.findByIdAndUpdate(req.params.id, req.body, function (err, post) {
+    if (err) return next(err);
+    res.json(post);
+  });
+};
+
 console.log("Server started on http://localhost:3000"); 
 
 app.get('/empleados',empleadoslist);
-
+app.get('/empleados/:id',empleadoId);
+app.post('/',saveEmpleado);
+app.delete('/delete/:id',deleteId);
+app.put('/:id',updateEmpl);
 app.listen(3000);
+
+/*
+Ejemplo add Element
+curl -i -X POST -H "Content-Type: application/json" -d '{ "nombre":"Daniell","tarea":"code","estado": "lista" }' localhost:3000/
+*/
