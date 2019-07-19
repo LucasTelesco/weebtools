@@ -1,8 +1,9 @@
 var express = require("express");
 var mongoose = require('mongoose');
+var path = require("path");
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://lucas:1234@localhost:27017/empleados');
-
+const bodyParser = require('body-parser');
 
 var Schema = mongoose.Schema;
 
@@ -70,6 +71,9 @@ app.get('/empleados/:id',empleadoId);
 app.post('/',saveEmpleado);
 app.delete('/delete/:id',deleteId);
 app.put('/:id',updateEmpl);
+
+app.use(express.static(path.join(__dirname,'dist')));
+
 app.listen(3000);
 
 /*
