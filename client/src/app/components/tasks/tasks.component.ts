@@ -30,7 +30,7 @@ export class TasksComponent implements OnInit {
     const newTask:Task = {
       nombre:this.title,
       tarea:this.title2,
-      estado:"falta"
+      isDone:false,
       //title: this.title,
       //isDone: false
     };
@@ -58,7 +58,18 @@ export class TasksComponent implements OnInit {
         })
     }
   }     
-
-
+  
+  updateStatus(task: Task) {
+    var newTask = {            
+      _id: task._id,
+      nombre: task.nombre,
+      tarea: task.tarea,
+      isDone: !task.isDone
+    };
+    this.taskService.updateTask(newTask)
+      .subscribe(res => {
+        task.isDone = !task.isDone;
+      })
+  }
 
 }

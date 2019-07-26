@@ -10,7 +10,7 @@ var Schema = mongoose.Schema;
 var blogSchema = new mongoose.Schema({
     nombre:  String,
     tarea: String,
-    estado: String
+    isDone: Boolean,
   });
 
 var Empleado = mongoose.model('Empleado', blogSchema);
