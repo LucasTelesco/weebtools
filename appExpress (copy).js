@@ -46,6 +46,7 @@ saveEmpleado = function(req, res, next) {
   Empleado.create(req.body, function (err, post) {
     if (err) return next(err);
     res.json(post);
+    console.log("se agrego nuevo empleado");
   });
 };
 

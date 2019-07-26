@@ -18,6 +18,7 @@ var Empleado = mongoose.model('Empleado', blogSchema);
 //var router = express.Router();
 
 var app = express(); //starts up your app
+app.use(bodyParser.json());
 /*
 app.get("/",function(req,res){
  res.send("Hello world");
@@ -44,6 +45,7 @@ empleadoId = function(req, res, next) {
 saveEmpleado = function(req, res, next) {
   Empleado.create(req.body, function (err, post) {
     if (err) return next(err);
+    console.log("esta en guardar empleado"+req.body);
     res.json(post);
   });
 };

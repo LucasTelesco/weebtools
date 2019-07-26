@@ -11,6 +11,7 @@ import { Task } from '../../Task';
 export class TasksComponent implements OnInit {
   tasks: Task[];
   title: string;
+  title2: string;
 
   constructor(private taskService: TaskService) {
     this.taskService.getTasks()
@@ -27,13 +28,37 @@ export class TasksComponent implements OnInit {
   addTask(event){
     event.preventDefault();
     const newTask:Task = {
-      title: this.title,
-      isDone: false
+      nombre:this.title,
+      tarea:this.title2,
+      estado:"falta"
+      //title: this.title,
+      //isDone: false
     };
     this.taskService.addTask(newTask)
       .subscribe(task => {
         this.tasks.push(task);
-        console.log(this.tasks)
+        this.title = '';
+        this.title2 = '';
       })        
   }
+  deleteTask(id) {
+    const response = confirm('are you sure to delete it?');
+    if (response ){
+      const tasks = this.tasks;
+      this.taskService.deleteTask(id)
+        .subscribe(data => {
+          console.log(data.n);
+          
+            for(let i = 0; i < tasks.length; i++) {
+              if(tasks[i]._id == id) {
+                tasks.splice(i, 1);
+              }
+            }
+  
+        })
+    }
+  }     
+
+
+
 }
