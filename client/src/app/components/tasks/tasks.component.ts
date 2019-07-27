@@ -42,7 +42,7 @@ export class TasksComponent implements OnInit {
       })        
   }
   deleteTask(id) {
-    const response = confirm('are you sure to delete it?');
+    const response = confirm('seguro que desea eliminar?');
     if (response ){
       const tasks = this.tasks;
       this.taskService.deleteTask(id)
