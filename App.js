@@ -5,9 +5,6 @@ mongoose.Promise = global.Promise;
 
 const bodyParser = require('body-parser');
 
-
-
-
 //var router = express.Router();
 var app = express(); //starts up your app
 var index = require('./routes/index');
