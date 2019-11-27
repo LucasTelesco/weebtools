@@ -7,11 +7,10 @@ var request = require('request');
 
 
 it('Main page content', function(done) {
-    // request('http://localhost:3000/empleados' , function(error, response, body) {
+    request('http://localhost:3000/empleados' , function(error, response, body) {
 
-    //     expect(response).to.have.status(200);
-    //     done();
-    // });
-    //expect(response).to.have.status(200);
-    done();
+        expect(response).to.have.status(200);
+        done();
+    });
+
 });
