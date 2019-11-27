@@ -8,8 +8,8 @@ jobs: # a collection of steps
     steps: # a collection of executable commands
       - checkout # special step to check out source code to working directory
       - run:
-          name: listdir
-          command: ls            
+          name: docker-version
+          command: docker-compose --version                
       - run:
           name: update-npm
           command: 'sudo npm install -g npm@latest'
@@ -23,6 +23,9 @@ jobs: # a collection of steps
           key: dependency-cache-{{ checksum "package-lock.json" }}
           paths:
             - ./node_modules
+      - run:
+          name: docker
+          command: docker-compose up -d       
       - run: # run tests
           name: test
           command: npm test
