@@ -12,7 +12,7 @@ jobs: # a collection of steps
           command: docker-compose --version  
 
       - setup_remote_docker
-                    
+
       - run:
           name: update-npm
           command: 'sudo npm install -g npm@latest'
@@ -31,7 +31,7 @@ jobs: # a collection of steps
           command: docker-compose up -d       
       - run: # run tests
           name: test
-          command: npm test
+          command: docker-compose exec api npm test
       - store_test_results: # for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
           path: test-results.xml
       # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples
