@@ -4,7 +4,9 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var path = require("path");
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://lucas:1234@localhost:27017/empleados');
+mongoose.connect('mongodb://lucas:1234@mongo:27017/admin')
+.then(()=> console.log("mongo conect"))
+.catch((err)=> console.log(err));
 const bodyParser = require('body-parser');
 
 var Schema = mongoose.Schema;

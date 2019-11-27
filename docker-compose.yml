@@ -1,0 +1,19 @@
+version: '2'
+services:
+    mongo:
+        image: mongo
+        restart: always
+        environment:
+            MONGO_INITDB_ROOT_USERNAME: lucas
+            MONGO_INITDB_ROOT_PASSWORD: 1234
+        ports:
+            - "27017:27017"
+    api:  
+        build:
+            context: ./
+            dockerfile: nodejs.Dockerfile
+        volumes:    
+            - "./:/src/"  
+        ports:    
+            - "3000:3000"
+        command: node app.js
