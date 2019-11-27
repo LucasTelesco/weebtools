@@ -28,10 +28,7 @@ jobs: # a collection of steps
             - ./node_modules
       - run:
           name: docker
-          command: docker-compose up -d       
-      - run: # run tests
-          name: test
-          command: docker-compose exec api npm test
+          command: docker-compose up -d && docker-compose exec api npm test
       - store_test_results: # for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
           path: test-results.xml
       # See https://circleci.com/docs/2.0/deployment-integrations/ for deploy examples
